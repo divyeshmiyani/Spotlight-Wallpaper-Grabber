@@ -1,6 +1,9 @@
 # Spotlight-Wallpaper-Grabber
 Saves Windows10 Spotlight Wallpaper
 
+## Requirements
+Pillow => 8.2.0
+
 ## Setup
 Run `pip install -r requirements.txt` or `python -m pip install -r requirements.txt` command in cmd to resolve requirements
 
