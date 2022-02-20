@@ -9,5 +9,5 @@ Just run the `main.py` file
 window will appear like this<br><br>
 <img src=Screenshots/first_screen.png><br><br>
 Click on `Browse` button or enter path
-Click on `Save` button <br>
+Click on `Save` button <br><br>
 Currently running Spotlight Wallpaper will be saved to your desired directory.
