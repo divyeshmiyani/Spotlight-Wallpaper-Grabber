@@ -1,1 +1,5 @@
-Pillow==8.2.0
+google_auth_oauthlib==0.4.4
+google_api_python_client==2.55.0
+Pillow==9.2.0
+protobuf==4.21.4
+PyQt5==5.15.7
