@@ -6,6 +6,7 @@ import PyQt5.QtGui as Qtg
 import PyQt5.QtCore as Qtc
 import json
 import os
+from threading import Thread
 
 data = {
     "syncTime": 'Not Yet',
@@ -43,16 +44,16 @@ class MainWindow(Qtw.QWidget):
 
         # Save Button
         self.saveButton = Qtw.QPushButton("Save")
-        self.saveButton.clicked.connect(lambda: self.execute())
+        self.saveButton.clicked.connect(lambda: Thread(target=self.execute).start())
 
         # GDrive Connect Button
         self.connectButton = Qtw.QPushButton("Connect")
-        self.connectButton.clicked.connect(lambda: self.connectToGDrive())
+        self.connectButton.clicked.connect(lambda: Thread(target=self.connectToGDrive).start())
         self.connectButton.setEnabled(False)
 
         # GDrive Sync Button
         self.syncButton = Qtw.QPushButton("Sync")
-        self.syncButton.clicked.connect(lambda: self.sync())
+        self.syncButton.clicked.connect(lambda: Thread(target=self.sync).start())
         self.syncButton.setEnabled(False)
 
         if os.path.exists('credentials.json'):
@@ -132,10 +133,12 @@ class MainWindow(Qtw.QWidget):
         self.close()
 
     def execute(self):
+        self.saveButton.setEnabled(False)
         if not self.destination_path:
             self.browse()
         if self.destination_path:
             File().save_all(location=self.destination_path, dest='local')
+        self.saveButton.setEnabled(True)
 
 
 app = Qtw.QApplication([])
