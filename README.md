@@ -3,12 +3,11 @@
 Saves Windows10 Spotlight Wallpaper
 
 ## Requirements
-
-google_auth_oauthlib==0.4.4
-google_api_python_client==2.55.0
-Pillow==9.2.0
-protobuf==4.21.4
-PyQt5==5.15.7
+<br>google_auth_oauthlib==0.4.4
+<br>google_api_python_client==2.55.0
+<br>Pillow==9.2.0
+<br>protobuf==4.21.4
+<br>PyQt5==5.15.7
 
 ## Setup
 
