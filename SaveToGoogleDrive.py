@@ -1,48 +1,46 @@
 # Saves Wallpaper/s to Google Drive
 import json
-import os
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.http import MediaFileUpload
-from google.oauth2.reauth import exceptions
 
 folder_id = 0
 
 
 class SaveToGoogleDrive:
     def __init__(self):
-        print('__init__')
-        # If modifying these scopes, delete the file token.json.
+        with open("data.json") as jsonfile:
+            self.data = json.load(jsonfile)
+
         SCOPES = ['https://www.googleapis.com/auth/drive']
 
         self.creds = None
-        # The file token.json stores the user's access and refresh tokens, and is
-        # created automatically when the authorization flow completes for the first
-        # time.
-        if os.path.exists('token.json'):
-            self.creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-        # If there are no (valid) credentials available, let the user log in.
+
         try:
-            if not (self.creds and self.creds.valid) and self.creds and self.creds.expired and self.creds.refresh_token:
-                self.creds.refresh(Request())
-        except exceptions.RefreshError:
+            self.creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+            self.creds.refresh(Request())
+        except:
             flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
             self.creds = flow.run_local_server(port=0)
+        finally:
+            # Save the credentials for the next run
+            with open('token.json', 'w') as token:
+                token.write(self.creds.to_json())
 
-        # Save the credentials for the next run
-
-        with open('token.json', 'w') as token:
-            token.write(self.creds.to_json())
+        # google drive folder metadata
         self.folder_metadata = {
-            'name': 'SpotlightWallpaper',
+            'name': 'Spotlight Wallpaper',
             'mimeType': 'application/vnd.google-apps.folder'
         }
         self.service = build('drive', 'v3', credentials=self.creds, static_discovery=False)
 
+    def __del__(self):
+        with open('data.json', 'w') as fp:
+            json.dump(self.data, fp)
+
     def __search_folder(self):
-        print('search folder')
         # Page Token
         page_token = None
 
@@ -61,23 +59,10 @@ class SaveToGoogleDrive:
                 file = self.service.files().create(body=self.folder_metadata, fields='id').execute()
                 return file.get('id')
 
-    @staticmethod
-    def __is_already_uploaded(file_name):
-        print('is already present')
-        with open("data.json") as jsonfile:
-            data = json.load(jsonfile)
-
-        if file_name in data['filesUploaded']:
-            return True
-
-        data['filesUploaded'].append(file_name)
-
-        print(data['filesUploaded'])
-        with open('data.json', 'w') as fp:
-            json.dump(data, fp)
+    def __is_already_uploaded(self, file_name):
+        return file_name in self.data['filesUploaded']
 
     def __upload_file(self, path):
-        print('upload file')
         file_name = path.split('\\')[-1] + '.jpg'
 
         if self.__is_already_uploaded(file_name):
@@ -89,10 +74,9 @@ class SaveToGoogleDrive:
         }
         media = MediaFileUpload(path, mimetype='image/jpeg')
         self.service.files().create(body=metadata, media_body=media, fields='id').execute()
-        print('uploaded file')
+        self.data['filesUploaded'].append(file_name)
 
     def execute(self, path):
-        print('execute')
         global folder_id
         if not folder_id:
             folder_id = self.__search_folder()
