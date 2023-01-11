@@ -2,11 +2,11 @@
 Saves Windows Spotlight Wallpaper
 
 ## Contains
-[Requirements](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/README.md#requirements)  
-[Setup](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/README.md#setup)  
-[Make build](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/README.md#make-buid)  
-[Usage](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/README.md#usage)  
-[Tested on](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/README.md#tested-on)
+[Requirements](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#requirements)  
+[Setup](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#setup)  
+[Make build](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#make-buid)  
+[Usage](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#usage)  
+[Tested on](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#tested-on)
 
 ## Requirements  
 google_auth_oauthlib==0.4.4  
