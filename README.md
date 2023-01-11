@@ -22,15 +22,14 @@ Run `pip install -r requirements.txt` or `python -m pip install -r requirements.
 ## Make buid
 Clone repository Using git command  
 `git clone https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber.git `  
-Or Simple Download and extract  
+Or Simply download and extract  
 
-Run commands in terminal  
+Run command in terminal  
 `pyinstaller --onefile --noconsole --clean SWG.py`  
-
-Executable file will be found in `./dist` folder
+This command will create executable file in `./dist` folder  
 
 ## Usage
-Run `SWG.exe` file ( to create .exe file refer [this](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber/edit/main/README.md#make-buid) )  
+Run `SWG.exe` file ( to create .exe file refer [this](https://github.com/divyeshmiyani/Spotlight-Wallpaper-Grabber#make-buid) )  
 **OR**  
 Just run the `SWG.py` file
 window will appear like this  
